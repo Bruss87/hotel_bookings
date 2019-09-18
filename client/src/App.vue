@@ -1,17 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <bookings-table :bookings="bookings" />
+    <booking-form />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import BookingsTable from './components/BookingsTable.vue'
+import BookingForm  from './components/BookingForm.vue'
+import BookingService from './services/BookingService.js'
 
 export default {
   name: 'app',
+  data (){
+    return {
+      bookings: []
+    }
+  },
   components: {
-    HelloWorld
+     'bookings-table': BookingsTable,
+     'booking-form': BookingForm
+  },
+  mounted(){
+    this.fetchData();
+  },
+  methods:{
+    fetchData(){
+      BookingService.getBookings()
+      .then(bookings => this.bookings = bookings);
+    }
   }
 }
 </script>
