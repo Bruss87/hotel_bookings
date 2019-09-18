@@ -9,6 +9,7 @@
 import BookingsTable from './components/BookingsTable.vue'
 import BookingForm  from './components/BookingForm.vue'
 import BookingService from './services/BookingService.js'
+import { eventBus} from './main.js'
 
 export default {
   name: 'app',
@@ -25,7 +26,12 @@ export default {
     this.fetchData();
 
     eventBus.$on('booking-added', booking => this.bookings.push(booking));
-    
+
+    eventBus.$on('booking-deleted', id => {
+      const index = this.bookings.indexOf(booking => booking._id === id)
+      this.bookings.splice(index, 1);
+    })
+
   },
   methods:{
     fetchData(){

@@ -3,15 +3,15 @@
     <h2>New Booking</h2>
     <div>
       <label for="name">Name:</label>
-      <input type="text" id="name" v-model="name"/>
+      <input type="text" id="name" v-model="name" required/>
     </div>
     <div>
       <label for="email">Email:</label>
-      <input type="text" id="email" v-model="email"/>
+      <input type="text" id="email" v-model="email" required/>
     </div>
     <div>
       <label for="check-in">Check In:</label>
-      <input type="checkbox" id="check-in" v-model="checkInStatus"/>
+      <input type="checkbox" id="check-in" v-model="checkInStatus" />
     </div>
     <input type="submit" value="Save" id="save"/>
   </form>
@@ -20,6 +20,7 @@
 <script>
 import BoookingService from '../services/BookingService.js';
 import BookingService from '../services/BookingService.js';
+import {eventBus} from '../main.js'
 
 export default {
     name: "booking-form",
